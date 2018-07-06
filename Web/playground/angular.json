@@ -25,7 +25,11 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/google-sign-in.js",
+              "src/assets/js/jquery.min.js",
+              "src/assets/js/google-api.js"
+            ]
           },
           "configurations": {
             "production": {

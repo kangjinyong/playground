@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './layout/layout.component';
+import { GoogleSignInService } from './common/services/google-sign-in.service';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { LayoutComponent } from './layout/layout.component';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [GoogleSignInService],
   bootstrap: [AppComponent]
 })
 
