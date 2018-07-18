@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --open",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -20,10 +20,8 @@
     "@angular/platform-browser": "^6.0.3",
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
-    "@types/gapi": "0.0.35",
-    "@types/gapi.auth2": "0.0.47",
     "core-js": "^2.5.4",
-    "rxjs": "^6.0.0",
+    "rxjs": "^6.2.2",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

@@ -1,8 +1,13 @@
 <div class="layout-header">
     <p>hello layout header!</p>
-    <button id="sign-in-or-out-button" style="margin-left: 25px">Sign In/Authorize</button>
-    <button id="revoke-access-button" style="margin-left: 25px">Revoke access</button>
-    <div id="auth-status" style="display: inline; padding-left: 25px"></div><hr>
+    <div>
+        <button *ngIf="!signedIn" style="margin-left: 25px" (click)="signInSignOut()">Sign In/Authorize</button>
+        <button *ngIf="signedIn" style="margin-left: 25px" (click)="signInSignOut()">Sign Out</button>
+        <button *ngIf="signedIn" style="margin-left: 25px" (click)="revokeAccess()">Revoke access</button>
+    </div>
+    <div *ngIf="signedIn">
+        welcome {{profile.fullName}}!
+    </div>
 </div>
 <router-outlet></router-outlet>
 <div class="layout-footer">
