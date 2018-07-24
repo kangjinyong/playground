@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { of, BehaviorSubject } from 'rxjs';
+import { Http } from '@angular/http';
+import { BehaviorSubject } from 'rxjs';
+import { map } from "rxjs/operators";
+import { Gapi } from '../interfaces/gapi.interface';
 
 import { UserProfile } from '../interfaces/user.interface';
 
@@ -7,24 +10,32 @@ declare const gapi: any;
 
 @Injectable()
 export class GoogleSignInService {
+    private gapiInfo: Gapi;  
     private scope: string = 'profile email';
     private userProfile: UserProfile = <UserProfile>{};
     private userProfileSubject = new BehaviorSubject<UserProfile>(<UserProfile>{});
     
     public userProfileObservable = this.userProfileSubject.asObservable();
 
+    constructor(
+        private http: Http
+    ) {}
+
     load() {
-        gapi.load('client:auth2', this.initClient.bind(this));
-        return of(true);
+        return this.http.get('http://localhost:8080/api').pipe<boolean>(map((res) => {
+            this.gapiInfo = res.json();
+            gapi.load('client:auth2', this.initClient.bind(this));
+            return true;
+        }));
     }
 
     initClient() {
         let self = this;
 
         gapi.client.init({
-            'apiKey': '[API_KEY]',
-            'clientId': '[CLIENT_ID]',
-            'scope': self.scope
+            'apiKey': this.gapiInfo.apiKey,
+            'clientId': this.gapiInfo.clientId,
+            'scope': this.scope
         }).then(function() {
             self.signInUserIfAuthorized();
         });
