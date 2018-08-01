@@ -1,0 +1,12 @@
+<div>Hello Todo List!</div>
+<div *ngFor="let todo of todos">
+    {{todo.description}}
+</div>
+<form (ngSubmit)="onSubmit()" #todoForm="ngForm">
+    <div [formGroup]="newTodoFormGroup">
+        <input 
+            type="text"
+            formControlName="description">
+    </div>
+    <button type="submit" [disabled]="!todoForm.form.valid">Submit</button>
+</form>

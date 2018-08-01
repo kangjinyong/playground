@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { GoogleSignInService } from '../common/services/google-sign-in.service';
 import { UserProfile } from '../common/interfaces/user.interface';
@@ -14,15 +14,13 @@ export class LayoutComponent implements OnInit, OnDestroy {
     profile: UserProfile;
 
     constructor(
-        private googleSignInService: GoogleSignInService,
-        private ref: ChangeDetectorRef
+        private googleSignInService: GoogleSignInService
     ) {}
 
     ngOnInit() {
-        this.subscriptions.push(this.googleSignInService.userProfileObservable.subscribe((profile) => {
+        this.subscriptions.push(this.googleSignInService.userSignedInObservable.subscribe((profile) => {
             this.signedIn = this.googleSignInService.isSignedIn();
             this.profile = profile;
-            this.ref.detectChanges();
         }));
     }
 

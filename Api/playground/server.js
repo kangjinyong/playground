@@ -5,11 +5,11 @@ var port = 8080;
 var router = express.Router();
 var mongoose = require('mongoose');
 
-var dbconfig = require('./db.config');
-var gapiSchema = require('./schemas/gapi.schema');
+var config = require('./server.config');
+var verifyAuth = require('./middleware/verifyAuth');
 var todosRouter = require('./routers/todos.router');
 
-const option = {
+var option = {
     socketTimeoutMS: 30000,
     keepAlive: true,
     reconnectTries: 30000,
@@ -17,11 +17,11 @@ const option = {
 };
 
 mongoose.connect('mongodb://' + 
-        dbconfig.development.database.username + ':' + 
-        dbconfig.development.database.pwd + '@' + 
-        dbconfig.development.database.url + ':' + 
-        dbconfig.development.database.port + '/' + 
-        dbconfig.development.database.db, option).then(function() {
+        config.development.database.username + ':' + 
+        config.development.database.pwd + '@' + 
+        config.development.database.url + ':' + 
+        config.development.database.port + '/' + 
+        config.development.database.db, option).then(function() {
     console.log('mongodb connected');    
 }, function(err) {
     console.log('Error connecting to mongodb');
@@ -33,33 +33,29 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use('/api', router);
 
-// Routes start from here.
-
 router.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    console.log('API called by ' + req.headers.host);
+  	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-Access-Token");
     next();
 });
 
+// Routes start from here.
+
 router.get('/', function(req, res) {
-	gapiSchema.findOne(function(err, gapiInfo) {
-        if (err) {
-            res.send(err);
-        }
-        res.json(gapiInfo)
-    })
+    res.json(
+        { 'apiKey': config.development.google.apiKey, 'clientId': config.development.google.clientId }
+    );
 });
 
-router.use('/todos', todosRouter);
+router.use('/todos', verifyAuth(), todosRouter);
 
 // Routes end here.
 
 app.use(function(err, req, res, next) {
     if (err) {
         res.status(500).send(err);
-        console.log('Error is ' + err);
+        console.log('Error message: ' + err);
     }
 });
 

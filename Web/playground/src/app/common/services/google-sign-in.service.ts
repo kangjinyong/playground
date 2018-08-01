@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Http } from '@angular/http';
 import { BehaviorSubject } from 'rxjs';
 import { map } from "rxjs/operators";
@@ -13,11 +13,13 @@ export class GoogleSignInService {
     private gapiInfo: Gapi;  
     private scope: string = 'profile email';
     private userProfile: UserProfile = <UserProfile>{};
-    private userProfileSubject = new BehaviorSubject<UserProfile>(<UserProfile>{});
+    private userSignedInSubject = new BehaviorSubject<UserProfile>(<UserProfile>{});
     
-    public userProfileObservable = this.userProfileSubject.asObservable();
+    public userSignedInObservable = this.userSignedInSubject.asObservable();
+    public googleAuthToken: string;
 
     constructor(
+        private zone: NgZone,
         private http: Http
     ) {}
 
@@ -38,7 +40,7 @@ export class GoogleSignInService {
             'scope': this.scope
         }).then(function() {
             self.signInUserIfAuthorized();
-        });
+        })
     }
 
     signInSignOut() {
@@ -47,12 +49,14 @@ export class GoogleSignInService {
         let GoogleAuth = gapi.auth2.getAuthInstance();
         if (GoogleAuth.isSignedIn.get()) {
             GoogleAuth.signOut().then(function() {
-                self.setUserProfile(null);
-            });
+                self.setUserProfileAndToken(null);
+            })
         } 
         else {
             GoogleAuth.signIn().then(function() {
                 self.signInUserIfAuthorized();
+            }).catch((err : {error: string}) => {
+                console.log(err.error);   
             });
         }
     }
@@ -61,8 +65,8 @@ export class GoogleSignInService {
         let self = this;
 
         gapi.auth2.getAuthInstance().disconnect().then(function() {
-            self.setUserProfile(null);
-        });
+            self.setUserProfileAndToken(null);
+        })
     }
 
     isSignedIn() {
@@ -75,26 +79,29 @@ export class GoogleSignInService {
             let user = GoogleAuth.currentUser.get();
             let isAuthorized = user.hasGrantedScopes(this.scope);
             if (isAuthorized) {
-                this.setUserProfile(user.getBasicProfile());
+                this.setUserProfileAndToken(user);
             }
             else {
-                this.setUserProfile(null);
+                this.setUserProfileAndToken(null);
             }
         }
     }
 
-    private setUserProfile(profile: any) {
-        if (profile == null) {
+    private setUserProfileAndToken(user: any) {
+        if (user == null) {
             this.userProfile = <UserProfile>{};
         }
         else {
+            let profile = user.getBasicProfile();
             this.userProfile.fullName = profile.getName();
             this.userProfile.firstName = profile.getGivenName();
             this.userProfile.lastName = profile.getFamilyName();
             this.userProfile.imageUrl = profile.getImageUrl();
             this.userProfile.emailAddress = profile.getEmail();
+
+            this.googleAuthToken = user.getAuthResponse().id_token;
         }
 
-        this.userProfileSubject.next(this.userProfile);
+        this.zone.run(() => this.userSignedInSubject.next(this.userProfile));
     }
 }

@@ -7,9 +7,9 @@ var config = {
             port: '27017',
             db: 'Playground'
         },
-        server: {
-            host: '127.0.0.1',
-            port: '8080'
+        google: {
+            apiKey: 'AIzaSyCr7Ce69pSDnNIfS3IPjICBcU8nwEWOCGw',
+            clientId: '937174194034-diuttf5no4kktme3f6q9aviru381a39m.apps.googleusercontent.com',
         }
     },
     production: {
@@ -20,9 +20,9 @@ var config = {
             port: '27017',
             db: 'Playground'
         },
-        server: {
-            host: '127.0.0.1',
-            port: '8080'
+        google: {
+            apiKey: 'AIzaSyCr7Ce69pSDnNIfS3IPjICBcU8nwEWOCGw',
+            clientId: '937174194034-diuttf5no4kktme3f6q9aviru381a39m.apps.googleusercontent.com',
         }
     }
 };
