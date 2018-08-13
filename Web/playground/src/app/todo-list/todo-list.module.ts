@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 
 import { TodoListService } from './services/todo-list.service';
 import { TodoList } from './todo-list.component';
+import { TodoItem } from './todo-item/todo-item.component';
+import { TodoListAngularMaterialModule } from './todo-list-angular-material.module';
 
 const routes: Routes = [
     { path: '', component: TodoList }
@@ -12,12 +14,14 @@ const routes: Routes = [
 
 @NgModule({
     declarations: [
-        TodoList
+        TodoList,
+        TodoItem
     ],
     imports: [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
+        TodoListAngularMaterialModule,
         RouterModule.forChild(routes)
     ],
     providers: [

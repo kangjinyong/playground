@@ -2,9 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
+import { Guid } from '../common/helpers/guid';
 import { TodoListService } from './services/todo-list.service'
 import { GoogleSignInService } from '../common/services/google-sign-in.service';
 import { Todo } from './interfaces/todo.interface';
+
 
 @Component({
     selector: 'todo-list',
@@ -58,6 +60,7 @@ export class TodoList implements OnInit, OnDestroy {
 
     private resetNewTodo() {
         this.newTodoFormGroup.patchValue({
+            id: Guid.newGuid(),
             description: ''
         })
     }

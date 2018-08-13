@@ -1,6 +1,6 @@
 <div>Hello Todo List!</div>
 <div *ngFor="let todo of todos">
-    {{todo.description}}
+    <todo-item [todoItem]="todo"></todo-item>
 </div>
 <form (ngSubmit)="onSubmit()" #todoForm="ngForm">
     <div [formGroup]="newTodoFormGroup">

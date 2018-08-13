@@ -1,15 +1,33 @@
-<div class="layout-header">
-    <p>hello layout header!</p>
-    <div>
-        <button *ngIf="!signedIn" style="margin-left: 25px" (click)="signInSignOut()">Sign In/Authorize</button>
-        <button *ngIf="signedIn" style="margin-left: 25px" (click)="signInSignOut()">Sign Out</button>
-        <button *ngIf="signedIn" style="margin-left: 25px" (click)="revokeAccess()">Revoke access</button>
+<div class="mat-typography">
+    <div class="layout-header">
+        <div>
+            <button mat-button *ngIf="!signedIn" (click)="signInSignOut()"><span>Sign In/Authorize</span></button>
+            <button mat-button *ngIf="signedIn" (click)="signInSignOut()"><span>Sign Out</span></button>
+            <button mat-button *ngIf="signedIn" (click)="revokeAccess()"><span>Revoke access</span></button>
+        </div>
+        <div *ngIf="signedIn">
+            <span>welcome {{profile.fullName}}!</span>
+        </div>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+                <mat-icon>dialpad</mat-icon>
+                <span>Redial</span>
+            </button>
+            <button mat-menu-item disabled>
+                <mat-icon>voicemail</mat-icon>
+                <span>Check voicemail</span>
+            </button>
+            <button mat-menu-item>
+                <mat-icon>notifications_off</mat-icon>
+                <span>Disable alerts</span>
+            </button>
+        </mat-menu>
     </div>
-    <div *ngIf="signedIn">
-        welcome {{profile.fullName}}!
+    <router-outlet></router-outlet>
+    <div class="layout-footer">
+        <p>hello layout footer!</p>
     </div>
-</div>
-<router-outlet></router-outlet>
-<div class="layout-footer">
-    <p>hello layout footer!</p>
 </div>

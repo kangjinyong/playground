@@ -11,6 +11,7 @@ todosRouter.route('/')
 	})
 	.post(function(req, res) {
 		var todo = new todosSchema();
+		todo.id = req.body.id;
 		todo.userId = req.body.userId;
 		todo.description = req.body.description;
 		todo.done = false;
