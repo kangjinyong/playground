@@ -1,0 +1,10 @@
+@import 'src/assets/scss/playground-theme';
+
+$primary: mat-color($playground-primary, default);
+$primary-lighter: mat-color($playground-primary, lighter);
+
+$height-header: 60px;
+$height-header-image: 28px;
+
+$padding-md: 6px;
+$padding-lg: 10px;

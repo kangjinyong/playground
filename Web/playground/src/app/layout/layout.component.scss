@@ -1,0 +1,44 @@
+@import 'src/assets/scss/playground-common';
+
+.layout-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-image: linear-gradient(to right, $primary, $primary-lighter);
+    height: $height-header;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .layout-profile-container,
+    .layout-menu-container {
+        padding: $padding-md;
+    }
+
+    .layout-menu-container {
+        display: flex;
+        align-items: center;
+        
+        .layout-menu-header {
+            display: flex;
+            align-items: center;
+
+            .layout-menu-header-image {
+                height: $height-header-image;
+                padding-left: $padding-lg;
+            }
+
+            .layout-menu-header-text {
+                font-weight: 500;
+                padding-left: $padding-lg;
+            }
+        }
+
+    }
+}
+
+.layout-body {
+    margin: $height-header 0;
+}

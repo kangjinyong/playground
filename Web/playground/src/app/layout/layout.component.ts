@@ -5,7 +5,8 @@ import { UserProfile } from '../common/interfaces/user.interface';
 
 @Component({
     selector: 'layout',
-    templateUrl: 'layout.component.html'
+    templateUrl: 'layout.component.html',
+    styleUrls: ['layout.component.scss']
 })
 
 export class LayoutComponent implements OnInit, OnDestroy {

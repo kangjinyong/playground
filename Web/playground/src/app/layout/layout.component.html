@@ -1,33 +1,43 @@
 <div class="mat-typography">
     <div class="layout-header">
-        <div>
+        <div class="layout-menu-container">
+            <button mat-icon-button [matMenuTriggerFor]="routeMenu">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <mat-menu #routeMenu="matMenu">
+                <button mat-menu-item routerLink="/Home">
+                    <mat-icon>home</mat-icon>
+                    <span>Home</span>
+                </button>
+                <button mat-menu-item routerLink="/TodoList">
+                    <mat-icon>format_list_bulleted</mat-icon>
+                    <span>Todo</span>
+                </button>
+            </mat-menu>
+            <div class="layout-menu-header">
+                <img class="layout-menu-header-image" src="../../assets/img/hero.png">
+                <span class="layout-menu-header-text">kjy's Playground</span>
+            </div>
+        </div>
+        <div class="layout-profile-container">
             <button mat-button *ngIf="!signedIn" (click)="signInSignOut()"><span>Sign In/Authorize</span></button>
-            <button mat-button *ngIf="signedIn" (click)="signInSignOut()"><span>Sign Out</span></button>
-            <button mat-button *ngIf="signedIn" (click)="revokeAccess()"><span>Revoke access</span></button>
+            <div *ngIf="signedIn">
+                <span>Welcome, </span>
+                <button mat-button [matMenuTriggerFor]="profileMenu">
+                    <span>{{profile.fullName}}</span>
+                </button>
+                <mat-menu #profileMenu="matMenu">
+                    <button mat-menu-item (click)="signInSignOut()">
+                        <span>Sign Out</span>
+                    </button>
+                    <button mat-menu-item (click)="revokeAccess()">
+                        <span>Revoke access</span>
+                    </button>
+                </mat-menu>
+            </div>
         </div>
-        <div *ngIf="signedIn">
-            <span>welcome {{profile.fullName}}!</span>
-        </div>
-        <button mat-icon-button [matMenuTriggerFor]="menu">
-            <mat-icon>more_vert</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-            <button mat-menu-item>
-                <mat-icon>dialpad</mat-icon>
-                <span>Redial</span>
-            </button>
-            <button mat-menu-item disabled>
-                <mat-icon>voicemail</mat-icon>
-                <span>Check voicemail</span>
-            </button>
-            <button mat-menu-item>
-                <mat-icon>notifications_off</mat-icon>
-                <span>Disable alerts</span>
-            </button>
-        </mat-menu>
     </div>
-    <router-outlet></router-outlet>
-    <div class="layout-footer">
-        <p>hello layout footer!</p>
+    <div class="layout-body">
+        <router-outlet></router-outlet>
     </div>
 </div>

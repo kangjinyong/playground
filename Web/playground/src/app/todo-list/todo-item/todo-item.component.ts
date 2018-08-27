@@ -20,6 +20,6 @@ export class TodoItem implements OnInit {
     }
 
     onCheckboxChange() {
-        console.log('changed');
+        
     }
 }

@@ -1,0 +1,9 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$playground-primary: mat-palette($mat-blue-gray, 700, 400, 900);
+$playground-accent: mat-palette($mat-orange, A200, A100, A400);
+$playground-warn: mat-palette($mat-red);
+$playground-theme: mat-light-theme($playground-primary, $playground-accent, $playground-warn);
+
+@include angular-material-theme($playground-theme);
