@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { Home } from './home.component';
+import { HomeAngularMaterialModule } from './home-angular-material.module';
 
 const routes: Routes = [
     { path: '', component: Home }
@@ -12,6 +13,7 @@ const routes: Routes = [
         Home
     ],
     imports: [
+        HomeAngularMaterialModule,
         RouterModule.forChild(routes)
     ]
 })

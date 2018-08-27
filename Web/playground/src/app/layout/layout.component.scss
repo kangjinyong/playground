@@ -5,7 +5,7 @@
     top: 0;
     left: 0;
     right: 0;
-    background-image: linear-gradient(to right, $primary, $primary-lighter);
+    background-image: linear-gradient(to right, $primary-darker, $primary-lighter);
     height: $height-header;
     display: flex;
     flex-direction: row;
@@ -20,6 +20,11 @@
     .layout-menu-container {
         display: flex;
         align-items: center;
+
+        .layout-menu-item {
+            margin: $margin-md;
+            padding: $padding-md;
+        }
         
         .layout-menu-header {
             display: flex;
@@ -31,14 +36,19 @@
             }
 
             .layout-menu-header-text {
-                font-weight: 500;
+                color: $white;
+                font-weight: $font-weight-bold-md;
                 padding-left: $padding-lg;
             }
         }
 
+        .layout-menu-icon {
+            color: $white;
+        }
     }
 }
 
 .layout-body {
     margin: $height-header 0;
+    padding: $padding-md;
 }

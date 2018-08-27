@@ -2,9 +2,20 @@
 
 $primary: mat-color($playground-primary, default);
 $primary-lighter: mat-color($playground-primary, lighter);
+$primary-darker: mat-color($playground-primary, darker);
+$accent: mat-color($playground-accent, default);
+$accent-lighter: mat-color($playground-accent, lighter);
+$accent-darker: mat-color($playground-accent, darker);
+$white: #FFFFFF;
+$black: #000000;
+
+$font-weight-bold-md: 400;
 
 $height-header: 60px;
 $height-header-image: 28px;
 
+$width-max: 100%;
+
+$margin-md: 6px;
 $padding-md: 6px;
 $padding-lg: 10px;

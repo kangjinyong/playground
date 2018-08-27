@@ -1,0 +1,9 @@
+@import 'src/assets/scss/playground-common';
+
+.home-container {
+    .home-card {
+        cursor: pointer;
+        margin-top: $margin-md;
+        background-color: $accent;
+    }
+}

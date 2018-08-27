@@ -1,7 +1,7 @@
 <div class="mat-typography">
     <div class="layout-header">
         <div class="layout-menu-container">
-            <button mat-icon-button [matMenuTriggerFor]="routeMenu">
+            <button mat-icon-button class="layout-menu-icon" [matMenuTriggerFor]="routeMenu">
                 <mat-icon>menu</mat-icon>
             </button>
             <mat-menu #routeMenu="matMenu">
@@ -11,16 +11,16 @@
                 </button>
                 <button mat-menu-item routerLink="/TodoList">
                     <mat-icon>format_list_bulleted</mat-icon>
-                    <span>Todo</span>
+                    <span>Todo Application</span>
                 </button>
             </mat-menu>
-            <div class="layout-menu-header">
+            <button mat-button routerLink="/Home" class="layout-menu-header layout-menu-item">
                 <img class="layout-menu-header-image" src="../../assets/img/hero.png">
                 <span class="layout-menu-header-text">kjy's Playground</span>
-            </div>
+            </button>
         </div>
         <div class="layout-profile-container">
-            <button mat-button *ngIf="!signedIn" (click)="signInSignOut()"><span>Sign In/Authorize</span></button>
+            <button mat-button *ngIf="!signedIn" (click)="signInSignOut()"><span>Sign In / Authorize</span></button>
             <div *ngIf="signedIn">
                 <span>Welcome, </span>
                 <button mat-button [matMenuTriggerFor]="profileMenu">
