@@ -14,11 +14,11 @@
 
     .layout-profile-container,
     .layout-menu-container {
+        display: flex;
         padding: $padding-md;
     }
 
     .layout-menu-container {
-        display: flex;
         align-items: center;
 
         .layout-menu-item {
@@ -44,6 +44,16 @@
 
         .layout-menu-icon {
             color: $white;
+        }
+    }
+
+    .layout-profile-container {
+        .layout-profile-github-container {
+            margin-right: $margin-xl;
+
+            .layout-profile-github-image {
+                height: $height-header-image;
+            }
         }
     }
 }

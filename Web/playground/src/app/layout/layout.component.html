@@ -24,6 +24,9 @@
             </button>
         </div>
         <div class="layout-profile-container">
+            <a href="https://github.com/kangjinyong/playground" target="_blank" mat-icon-button class="layout-profile-github-container" title="Github">
+                <img class="layout-profile-github-image" src="../../assets//img//github-logo.png">
+            </a>
             <button mat-button *ngIf="!signedIn" (click)="signInSignOut()"><span>Sign In / Authorize</span></button>
             <div *ngIf="signedIn">
                 <span>Welcome, </span>
