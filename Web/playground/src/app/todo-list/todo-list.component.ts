@@ -10,7 +10,8 @@ import { Todo } from './interfaces/todo.interface';
 
 @Component({
     selector: 'todo-list',
-    templateUrl: 'todo-list.component.html'
+    templateUrl: 'todo-list.component.html',
+    styleUrls: ['todo-list.component.scss']
 })
 
 export class TodoList implements OnInit, OnDestroy {
@@ -26,12 +27,13 @@ export class TodoList implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.newTodoFormGroup = this.fb.group({
-            description: ['']
+            description: [''],
+            order: ['']
         })
         
         this.subscriptions.push(this.googleSignInService.userSignedInObservable.subscribe((profile) => {
             if (this.googleSignInService.isSignedIn()) {
-                this.refreshTodos();
+                this.refreshTodos(true);
             }
             else {
                 this.todos = [];
@@ -45,23 +47,48 @@ export class TodoList implements OnInit, OnDestroy {
 
     onSubmit() {
         if (this.newTodoFormGroup.controls['description'].value) {
-            this.todoListService.addTodo(<Todo>this.newTodoFormGroup.value).subscribe((todo: Todo) => {
-                this.resetNewTodo();
-                this.refreshTodos();
-            });
+            if (this.googleSignInService.isSignedIn()) {
+                this.todoListService.addTodo(<Todo>this.newTodoFormGroup.value).subscribe((todo: Todo) => {
+                    this.refreshTodos(true);
+                });
+            }
+            else {
+                let newTodo = <Todo>this.newTodoFormGroup.value;
+                newTodo._id = Guid.newGuid();
+                this.todos.push(newTodo);
+                this.resetNewTodo(true);
+            }
         }
     }
 
-    private refreshTodos() {
+    deleteTodo(id: string) {
+        if (this.googleSignInService.isSignedIn()) {
+            this.refreshTodos(false);
+        }
+        else {
+            let index = this.todos.findIndex(todo => todo._id === id);
+            this.todos.splice(index, 1);
+        }
+    }
+
+    private refreshTodos(clear: boolean) {
         this.todoListService.getAllTodos().subscribe((data) => {
-            this.todos = data;
+            if (data) {
+                this.todos = data.sort(function(a, b) {return a.order - b.order});
+            }
+            this.resetNewTodo(clear);
         });
     }
 
-    private resetNewTodo() {
-        this.newTodoFormGroup.patchValue({
-            id: Guid.newGuid(),
-            description: ''
-        })
+    private resetNewTodo(clear: boolean) {
+        this.newTodoFormGroup.patchValue(<Todo>{
+            order: this.todos.length + 1,
+        });
+        
+        if (clear) {
+            this.newTodoFormGroup.patchValue(<Todo>{
+                description: ''
+            });
+        }
     }
 }

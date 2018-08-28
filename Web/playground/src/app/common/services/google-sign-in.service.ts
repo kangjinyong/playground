@@ -90,6 +90,7 @@ export class GoogleSignInService {
     private setUserProfileAndToken(user: any) {
         if (user == null) {
             this.userProfile = <UserProfile>{};
+            this.googleAuthToken = null;
         }
         else {
             let profile = user.getBasicProfile();

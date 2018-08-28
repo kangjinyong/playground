@@ -1,6 +1,22 @@
-<div>
-    {{todoItem.description}}
-    <mat-checkbox 
-        [checked]="true"
-        (change)="onCheckboxChange()"></mat-checkbox>
+<div class="todo-item">
+    <div class="todo-item-left-container">
+        <mat-checkbox 
+            [checked]="todoItem.done"
+            (change)="onCheckboxChange($event.checked)">
+        </mat-checkbox>
+        <div class="todo-item-description-container" click-outside (clickOutside)="globalClicked($event.value)" [ngClass]="{'width-max': editMode}">
+            <span *ngIf="!editMode" class="todo-item-description-text">{{todoItem.description}}</span>
+            <form *ngIf="editMode" class="todo-item-description-text-edit" (ngSubmit)="onSubmit()" [formGroup]="editTodoFormGroup">
+                <mat-form-field class="todo-item-edit-input">
+                    <input matInput type="text" [value]="todoItem.description" formControlName="description" #todoInput>
+                </mat-form-field>
+            </form>
+        </div>
+    </div>
+    <div class="todo-item-right-container">
+        <button mat-button (click)="deleteTodoItem()">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </div>
+    <mat-divider></mat-divider>
 </div>

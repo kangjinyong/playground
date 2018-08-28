@@ -1,0 +1,26 @@
+@import 'src/assets/scss/playground-common';
+
+.todo-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .todo-item-left-container,
+    .todo-item-right-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .todo-item-left-container,
+    .todo-item-edit-input,
+    .width-max {
+        width: $width-max;
+    }
+
+    .todo-item-description-container {
+        .todo-item-description-text,
+        .todo-item-description-text-edit {
+            margin-left: $margin-md;
+        }
+    }
+}

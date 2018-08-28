@@ -9,6 +9,7 @@ const appRoutes: Routes = [
         path: '', component: LayoutComponent, resolve: [PreloadResolver], children: [
             { path: 'Home', loadChildren: './home/home.module#HomeModule' },
             { path: 'TodoList', loadChildren: './todo-list/todo-list.module#TodoListModule' },
+            { path: 'Material', loadChildren: './material/material.module#MaterialModule' },
             { path: '', redirectTo: 'Home', pathMatch: 'full' }
         ]
     }

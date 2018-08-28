@@ -1,12 +1,12 @@
-<div>Hello Todo List!</div>
-<div *ngFor="let todo of todos">
-    <todo-item [todoItem]="todo"></todo-item>
+<div class="todo-list-container">
+    <form class="todo-new" (ngSubmit)="onSubmit()" [formGroup]="newTodoFormGroup">
+        <mat-form-field class="todo-new-input">
+            <input matInput type="text" placeholder="New Todo" formControlName="description">
+        </mat-form-field>
+    </form>
+    <mat-list>
+        <mat-list-item class="todo-item-container" *ngFor="let todo of todos">
+            <todo-item class="todo-item" [todoItem]="todo" (todoItemDeleted)="deleteTodo($event)"></todo-item>
+        </mat-list-item>
+    </mat-list>
 </div>
-<form (ngSubmit)="onSubmit()" #todoForm="ngForm">
-    <div [formGroup]="newTodoFormGroup">
-        <input 
-            type="text"
-            formControlName="description">
-    </div>
-    <button type="submit" [disabled]="!todoForm.form.valid">Submit</button>
-</form>

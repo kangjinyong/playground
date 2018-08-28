@@ -7,6 +7,7 @@ import { TodoListService } from './services/todo-list.service';
 import { TodoList } from './todo-list.component';
 import { TodoItem } from './todo-item/todo-item.component';
 import { TodoListAngularMaterialModule } from './todo-list-angular-material.module';
+import { ClickOutside } from '../common/directives/click-outside.directive'
 
 const routes: Routes = [
     { path: '', component: TodoList }
@@ -15,7 +16,8 @@ const routes: Routes = [
 @NgModule({
     declarations: [
         TodoList,
-        TodoItem
+        TodoItem,
+        ClickOutside
     ],
     imports: [
         CommonModule,

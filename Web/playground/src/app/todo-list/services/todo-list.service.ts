@@ -34,4 +34,26 @@ export class TodoListService {
                 return res.json();
             }));
     }
+
+    editTodo(modifiedTodo: Todo) {
+        return this.http.put('http://localhost:8080/api/todos/' + modifiedTodo._id, 
+            JSON.stringify(modifiedTodo),
+            { headers: new Headers({ 
+                'x-access-token': this.googleSignInService.googleAuthToken,
+                'Content-Type': 'application/json' 
+            })})
+            .pipe<Todo>(map((res) => {
+                return res.json();
+            })).toPromise();
+    }
+
+    deleteTodo(deleteTodo: Todo) {
+        return this.http.delete('http://localhost:8080/api/todos/' + deleteTodo._id, 
+            { headers: new Headers({
+                'x-access-token': this.googleSignInService.googleAuthToken
+            })})
+            .pipe<Todo>(map((res) => {
+                return res.json();
+            }));
+    }
 }

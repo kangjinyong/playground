@@ -1,0 +1,23 @@
+@import 'src/assets/scss/playground-common';
+
+.todo-list-container {
+    .todo-new {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .todo-new-input {
+            width: $width-max;
+        }
+    }
+
+    .todo-item-container {
+        .todo-item {
+            width: $width-max;
+        }
+    }
+
+    .todo-item-container:hover {
+        background-color: $accent-lighter;
+    }
+}
