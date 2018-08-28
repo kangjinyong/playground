@@ -16,11 +16,10 @@
     .layout-menu-container {
         display: flex;
         padding: $padding-md;
+        align-items: center;
     }
 
     .layout-menu-container {
-        align-items: center;
-
         .layout-menu-item {
             margin: $margin-md;
             padding: $padding-md;
