@@ -17,11 +17,11 @@ var option = {
 };
 
 mongoose.connect('mongodb://' + 
-        config.development.database.username + ':' + 
-        config.development.database.pwd + '@' + 
-        config.development.database.url + ':' + 
-        config.development.database.port + '/' + 
-        config.development.database.db, option).then(function() {
+        config.database.username + ':' + 
+        config.database.pwd + '@' + 
+        config.database.url + ':' + 
+        config.database.port + '/' + 
+        config.database.db, option).then(function() {
     console.log('mongodb connected');    
 }, function(err) {
     console.log('Error connecting to mongodb');
@@ -44,7 +44,7 @@ router.use(function(req, res, next) {
 
 router.get('/', function(req, res) {
     res.json(
-        { 'apiKey': config.development.google.apiKey, 'clientId': config.development.google.clientId }
+        { 'apiKey': config.google.apiKey, 'clientId': config.google.clientId }
     );
 });
 

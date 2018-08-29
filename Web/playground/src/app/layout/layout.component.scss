@@ -28,6 +28,7 @@
         .layout-menu-header {
             display: flex;
             align-items: center;
+            justify-content: center;
 
             .layout-menu-header-image {
                 height: $height-header-image;
@@ -37,7 +38,7 @@
             .layout-menu-header-text {
                 color: $white;
                 font-weight: $font-weight-bold-md;
-                padding-left: $padding-lg;
+                padding: 0 $padding-lg;
             }
         }
 
