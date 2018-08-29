@@ -24,7 +24,7 @@ export class GoogleSignInService {
     ) {}
 
     load() {
-        return this.http.get('http://localhost:8080/api').pipe<boolean>(map((res) => {
+        return this.http.get('http://13.229.128.19:8080/api').pipe<boolean>(map((res) => {
             this.gapiInfo = res.json();
             gapi.load('client:auth2', this.initClient.bind(this));
             return true;

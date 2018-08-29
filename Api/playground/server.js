@@ -1,9 +1,15 @@
 var express = require('express');
-var app = express();
+var https = require('https');
 var bodyParser = require('body-parser');
-var port = 8080;
 var router = express.Router();
 var mongoose = require('mongoose');
+var fs = require('fs');
+var app = express();
+
+var options = {
+  key: fs.readFileSync('./privkey.pem'),
+  cert: fs.readFileSync('/cert.pem')
+};
 
 var config = require('./server.config');
 var verifyAuth = require('./middleware/verifyAuth');
@@ -59,6 +65,4 @@ app.use(function(err, req, res, next) {
     }
 });
 
-app.listen(port, function(){
-    console.log('Listening on port ' + port);
-});
+https.createServer(options, app).listen(443);
