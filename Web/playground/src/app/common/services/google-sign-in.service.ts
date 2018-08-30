@@ -5,6 +5,7 @@ import { map } from "rxjs/operators";
 import { Gapi } from '../interfaces/gapi.interface';
 
 import { UserProfile } from '../interfaces/user.interface';
+import { DeploymentEnvironmentService } from './deployment-environment.service';
 
 declare const gapi: any;
 
@@ -20,11 +21,12 @@ export class GoogleSignInService {
 
     constructor(
         private zone: NgZone,
-        private http: Http
+        private http: Http,
+        private deploymentEnvironmentService: DeploymentEnvironmentService
     ) {}
 
     load() {
-        return this.http.get('https://13.229.128.19:8080/api').pipe<boolean>(map((res) => {
+        return this.http.get(this.deploymentEnvironmentService.getApiUrl() + 'api').pipe<boolean>(map((res) => {
             this.gapiInfo = res.json();
             gapi.load('client:auth2', this.initClient.bind(this));
             return true;

@@ -3,6 +3,7 @@ import { Http, Headers } from '@angular/http';
 import { map } from 'rxjs/operators';
 
 import { GoogleSignInService } from '../../common/services/google-sign-in.service';
+import { DeploymentEnvironmentService } from '../../common/services/deployment-environment.service';
 import { Todo } from '../interfaces/todo.interface';
 
 @Injectable()
@@ -10,11 +11,12 @@ export class TodoListService {
 
     constructor(
         private http: Http,
-        private googleSignInService: GoogleSignInService
+        private googleSignInService: GoogleSignInService,
+        private deploymentEnvironmentService: DeploymentEnvironmentService
     ) {}
 
     addTodo(newTodo: Todo) {
-        return this.http.post('http://localhost:8080/api/todos',
+        return this.http.post(this.deploymentEnvironmentService.getApiUrl() + 'api/todos',
             JSON.stringify(newTodo),
             { headers: new Headers({ 
                 'x-access-token': this.googleSignInService.googleAuthToken,
@@ -26,7 +28,7 @@ export class TodoListService {
     }
 
     getAllTodos() {
-        return this.http.get('http://localhost:8080/api/todos',
+        return this.http.get(this.deploymentEnvironmentService.getApiUrl() + 'api/todos',
             { headers: new Headers({
                 'x-access-token': this.googleSignInService.googleAuthToken
             })})
@@ -36,7 +38,7 @@ export class TodoListService {
     }
 
     editTodo(modifiedTodo: Todo) {
-        return this.http.put('http://localhost:8080/api/todos/' + modifiedTodo._id, 
+        return this.http.put(this.deploymentEnvironmentService.getApiUrl() + 'api/todos/' + modifiedTodo._id, 
             JSON.stringify(modifiedTodo),
             { headers: new Headers({ 
                 'x-access-token': this.googleSignInService.googleAuthToken,
@@ -48,7 +50,7 @@ export class TodoListService {
     }
 
     deleteTodo(deleteTodo: Todo) {
-        return this.http.delete('http://localhost:8080/api/todos/' + deleteTodo._id, 
+        return this.http.delete(this.deploymentEnvironmentService.getApiUrl() + 'api/todos/' + deleteTodo._id, 
             { headers: new Headers({
                 'x-access-token': this.googleSignInService.googleAuthToken
             })})
