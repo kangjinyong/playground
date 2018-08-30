@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { GoogleSignInService } from '../common/services/google-sign-in.service';
+import { WindowService } from '../common/services/window.service';
 import { UserProfile } from '../common/interfaces/user.interface';
 
 @Component({
@@ -15,7 +16,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
     profile: UserProfile;
 
     constructor(
-        private googleSignInService: GoogleSignInService
+        private googleSignInService: GoogleSignInService,
+        private windowService: WindowService
     ) {}
 
     ngOnInit() {
@@ -35,5 +37,9 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
     revokeAccess() {
         this.googleSignInService.revokeAccess();
+    }
+
+    isMobile() {
+        return this.windowService.isMobileDevice();
     }
 }

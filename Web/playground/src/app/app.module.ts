@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { LayoutComponent } from './layout/layout.component';
 import { GoogleSignInService } from './common/services/google-sign-in.service';
 import { DeploymentEnvironmentService } from './common/services/deployment-environment.service';
+import { WindowService } from './common/services/window.service';
 import { PreloadResolver } from './common/services/preload.service';
 
 @NgModule({
@@ -27,6 +28,7 @@ import { PreloadResolver } from './common/services/preload.service';
   providers: [
     GoogleSignInService,
     DeploymentEnvironmentService,
+    WindowService,
     PreloadResolver
   ],
   bootstrap: [AppComponent]
