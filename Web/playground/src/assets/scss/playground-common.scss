@@ -10,6 +10,7 @@ $white: #FFFFFF;
 $black: #000000;
 
 $font-weight-bold-md: 400;
+$font-size-mobile: 16px;
 
 $height-header: 60px;
 $height-header-image: 28px;
@@ -21,3 +22,10 @@ $margin-lg: 10px;
 $margin-xl: 18px;
 $padding-md: 6px;
 $padding-lg: 10px;
+
+$mobile-max-width: 480px;
+@media (max-width: $mobile-max-width) {
+    input {
+        font-size: $font-size-mobile;
+    }
+}

@@ -28,7 +28,7 @@ export class GoogleSignInService {
     load() {
         return this.http.get(this.deploymentEnvironmentService.getApiUrl() + 'api').pipe<boolean>(map((res) => {
             this.gapiInfo = res.json();
-            gapi.load('client:auth2', this.initClient.bind(this));
+            gapi.load('auth2', this.initClient.bind(this));
             return true;
         }));
     }
@@ -36,7 +36,7 @@ export class GoogleSignInService {
     initClient() {
         let self = this;
 
-        gapi.client.init({
+        gapi.auth2.init({
             'apiKey': this.gapiInfo.apiKey,
             'clientId': this.gapiInfo.clientId,
             'scope': this.scope
