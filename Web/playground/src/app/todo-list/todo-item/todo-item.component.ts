@@ -70,7 +70,6 @@ export class TodoItem implements OnInit {
     }
 
     globalClicked(outside: boolean) {
-        console.log(outside);
         if (this.editMode && outside) {
             this.onSubmit();
         }
