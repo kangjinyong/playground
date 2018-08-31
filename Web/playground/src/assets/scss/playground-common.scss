@@ -25,6 +25,7 @@ $padding-lg: 10px;
 
 $mobile-max-width: 480px;
 @media (max-width: $mobile-max-width) {
+    textarea,
     input {
         font-size: $font-size-mobile;
     }
