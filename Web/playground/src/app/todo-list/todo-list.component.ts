@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { Guid } from '../common/helpers/guid';
 import { TodoListService } from './services/todo-list.service'
 import { GoogleSignInService } from '../common/services/google-sign-in.service';
+import { WindowService } from '../common/services/window.service';
 import { Todo } from './interfaces/todo.interface';
 
 
@@ -22,7 +23,8 @@ export class TodoList implements OnInit, OnDestroy {
     constructor(
         private fb: FormBuilder,
         private googleSignInService: GoogleSignInService,
-        private todoListService: TodoListService
+        private todoListService: TodoListService,
+        private windowService: WindowService
     ) {}
 
     ngOnInit() {
@@ -69,6 +71,10 @@ export class TodoList implements OnInit, OnDestroy {
             let index = this.todos.findIndex(todo => todo._id === id);
             this.todos.splice(index, 1);
         }
+    }
+
+    isMobile() {
+        return this.windowService.isMobileDevice();
     }
 
     private refreshTodos(clear: boolean) {

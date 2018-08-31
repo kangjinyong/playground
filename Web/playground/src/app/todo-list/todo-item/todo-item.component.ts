@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef }
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 import { GoogleSignInService } from '../../common/services/google-sign-in.service';
+import { WindowService } from '../../common/services/window.service';
 import { TodoListService } from '../services/todo-list.service';
 import { Todo } from '../interfaces/todo.interface';
 
@@ -27,6 +28,7 @@ export class TodoItem implements OnInit {
 
     constructor(
         private googleSignInService: GoogleSignInService,
+        private windowService: WindowService,
         private todoListService: TodoListService,
         private fb: FormBuilder
     ) {}
@@ -68,6 +70,7 @@ export class TodoItem implements OnInit {
     }
 
     globalClicked(outside: boolean) {
+        console.log(outside);
         if (this.editMode && outside) {
             this.onSubmit();
         }
@@ -76,7 +79,11 @@ export class TodoItem implements OnInit {
         }
     }
 
-    private setEditMode(edit: boolean) {
+    isMobile() {
+        return this.windowService.isMobileDevice();
+    }
+
+    setEditMode(edit: boolean) {
         this.editMode = edit;
     }
 }

@@ -1,4 +1,4 @@
-<div class="todo-item">
+<div *ngIf="!isMobile()" class="todo-item">
     <div class="todo-item-left-container">
         <mat-checkbox 
             [checked]="todoItem.done"
@@ -8,7 +8,7 @@
             <span *ngIf="!editMode" class="todo-item-description-text">{{todoItem.description}}</span>
             <form *ngIf="editMode" class="todo-item-description-text-edit" (ngSubmit)="onSubmit()" [formGroup]="editTodoFormGroup">
                 <mat-form-field class="todo-item-edit-input">
-                    <input matInput type="text" [value]="todoItem.description" formControlName="description" #todoInput>
+                    <input matInput type="text" [value]="todoItem.description" formControlName="description" maxLength=150 #todoInput>
                 </mat-form-field>
             </form>
         </div>
@@ -19,4 +19,57 @@
         </button>
     </div>
     <mat-divider></mat-divider>
+</div>
+<div *ngIf="isMobile()" class="todo-item">
+    <mat-card *ngIf="!editMode" class="todo-item-card-container">
+        <mat-card-content>
+            <span *ngIf="!editMode" class="todo-item-description-text">{{todoItem.description}}</span>
+        </mat-card-content>
+        <mat-card-actions>
+            <div class="todo-item-actions-container">
+                <div class="todo-item-checked-container">
+                    <mat-checkbox 
+                        [checked]="todoItem.done"
+                        (change)="onCheckboxChange($event.checked)">
+                    </mat-checkbox>
+                </div>
+                <div class="todo-item-edit-container">
+                    <button mat-button (click)="setEditMode(true)">
+                        <mat-icon>create</mat-icon>
+                    </button>
+                    <button mat-button (click)="deleteTodoItem()">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+    <mat-card *ngIf="editMode" class="todo-item-card-container">
+        <mat-card-content>
+            <form class="todo-item-description-text-edit" (ngSubmit)="onSubmit()" [formGroup]="editTodoFormGroup">
+                <mat-form-field class="todo-item-edit-input">
+                    <textarea class="todo-item-description-textarea" 
+                        matInput
+                        cdkTextareaAutosize
+                        formControlName="description" 
+                        [value]="todoItem.description" 
+                        maxLength=150 
+                        #todoInput></textarea>
+                </mat-form-field>
+            </form>
+        </mat-card-content>
+        <mat-card-actions>
+            <div class="todo-item-actions-container">
+                <div></div>
+                <div class="todo-item-edit-container">
+                    <button mat-button (click)="onSubmit()">
+                        <mat-icon>save</mat-icon>
+                    </button>
+                    <button mat-button (click)="setEditMode(false)">
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </mat-card-actions>
+    </mat-card>
 </div>

@@ -37,11 +37,10 @@ export class GoogleSignInService {
         let self = this;
 
         gapi.auth2.init({
-            'apiKey': this.gapiInfo.apiKey,
-            'clientId': this.gapiInfo.clientId,
-            'scope': this.scope
+            clientId: this.gapiInfo.clientId,
+            fetch_basic_profile: true
         }).then(function() {
-            self.signInUserIfAuthorized();
+            self.setUserProfileIfAuthorized();
         })
     }
 
@@ -56,7 +55,7 @@ export class GoogleSignInService {
         } 
         else {
             GoogleAuth.signIn().then(function() {
-                self.signInUserIfAuthorized();
+                self.setUserProfileIfAuthorized();
             }).catch((err : {error: string}) => {
                 console.log(err.error);   
             });
@@ -75,7 +74,7 @@ export class GoogleSignInService {
         return Object.keys(this.userProfile).length !== 0;
     }
 
-    private signInUserIfAuthorized() {
+    private setUserProfileIfAuthorized() {
         let GoogleAuth = gapi.auth2.getAuthInstance();
         if (GoogleAuth.isSignedIn.get()) {
             let user = GoogleAuth.currentUser.get();

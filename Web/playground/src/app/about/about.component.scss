@@ -1,11 +1,9 @@
 @import 'src/assets/scss/playground-common';
 
-.home-container {
+.about-container {
     width: $width-max;
     
-    .home-card {
-        cursor: pointer;
+    .about-card {
         margin-top: $margin-md;
-        background-color: $accent;
     }
 }

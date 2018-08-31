@@ -4,9 +4,12 @@
             <input matInput type="text" placeholder="New Todo" formControlName="description">
         </mat-form-field>
     </form>
-    <mat-list>
+    <mat-list *ngIf="!isMobile()">
         <mat-list-item class="todo-item-container" *ngFor="let todo of todos">
             <todo-item class="todo-item" [todoItem]="todo" (todoItemDeleted)="deleteTodo($event)"></todo-item>
         </mat-list-item>
     </mat-list>
+    <div *ngIf="isMobile()">
+        <todo-item *ngFor="let todo of todos" class="todo-item" [todoItem]="todo" (todoItemDeleted)="deleteTodo($event)"></todo-item>
+    </div>
 </div>

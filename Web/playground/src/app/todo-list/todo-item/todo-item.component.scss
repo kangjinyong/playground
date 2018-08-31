@@ -18,9 +18,22 @@
     }
 
     .todo-item-description-container {
-        .todo-item-description-text,
-        .todo-item-description-text-edit {
-            margin-left: $margin-md;
-        }
+        margin-left: $margin-md;
+    }
+
+    .todo-item-card-container {
+        width: $width-max;
+        margin-top: $margin-md;
+    }
+
+    .todo-item-actions-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .todo-item-description-textarea {
+        overflow: hidden;
+        resize: none;
     }
 }
