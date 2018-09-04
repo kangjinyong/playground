@@ -1,0 +1,23 @@
+<mat-expansion-panel class="material-expansion-panel">
+    <mat-expansion-panel-header>
+        <mat-panel-title>Expansion Panel 1</mat-panel-title>
+        <mat-panel-description>Sample Card</mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-card class="material-card">
+        <mat-card-title>Angular Material Card</mat-card-title>
+        <mat-card-subtitle>Subtitle</mat-card-subtitle>
+        <mat-card-content>
+            <span>This card is {{lockStatus ? "Locked" : "Unlocked"}}</span>
+        </mat-card-content>
+        <mat-card-actions>
+            <button class="material-card-button" mat-button (click)="lock(true)">
+                <mat-icon>lock</mat-icon>
+                <span>Lock</span>
+            </button>
+            <button class="material-card-button" mat-button (click)="lock(false)">
+                <mat-icon>lock_open</mat-icon>
+                <span>Unlock</span>
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</mat-expansion-panel>
