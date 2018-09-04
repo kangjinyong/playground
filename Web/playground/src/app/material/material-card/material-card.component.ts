@@ -7,15 +7,28 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class MaterialCard implements OnInit {
-    lockStatus: boolean;
+    switchedOn: boolean;
 
     constructor() {}
 
     ngOnInit() {
-        this.lock(false);
     }
 
-    lock(toLock: boolean) {
-        this.lockStatus = toLock;
+    toggle(checked: boolean) {
+        this.switchedOn = checked;
+    }
+
+    getClass() {
+        if (this.switchedOn)
+            return 'material-card-on';
+        else    
+            return 'material-card-off';
+    }
+
+    getStatus() {
+        if (this.switchedOn)
+            return 'On';
+        else
+            return 'Off';
     }
 }

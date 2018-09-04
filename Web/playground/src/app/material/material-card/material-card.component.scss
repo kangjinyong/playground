@@ -2,4 +2,14 @@
 
 .material-expansion-panel {
     margin-top: $margin-md;
+
+    .material-card-on {
+        font-weight: $font-weight-bold-md;
+        color: $success;
+    }
+
+    .material-card-off {
+        font-weight: $font-weight-bold-md;
+        color: $danger;
+    }
 }
