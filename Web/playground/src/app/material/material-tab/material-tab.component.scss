@@ -2,4 +2,13 @@
 
 .material-expansion-panel {
     margin-top: $margin-md;
+
+    .mat-tab-content {
+        margin-top: $margin-md;
+
+        .width-max {
+            width: calc(#{$width-max} - 2 * #{$margin-md});
+            margin: $margin-md;
+        }
+    }
 }

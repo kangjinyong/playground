@@ -21,8 +21,8 @@ const routes: Routes = [
         MaterialStepper
     ],
     imports: [
-        MaterialAngularMaterialModule,
         CommonModule,
+        MaterialAngularMaterialModule,
         RouterModule.forChild(routes)
     ]
 })

@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GestureConfig } from '@angular/material';
+import 'hammerjs';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppAngularMaterialModule } from './app-angular-material.module';
@@ -29,7 +31,8 @@ import { PreloadResolver } from './common/services/preload.service';
     GoogleSignInService,
     DeploymentEnvironmentService,
     WindowService,
-    PreloadResolver
+    PreloadResolver,
+    { provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig }
   ],
   bootstrap: [AppComponent]
 })
